@@ -8,10 +8,7 @@ on:
       - opened
       - synchronize
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+permissions: write-all
 
 jobs:
   deploy-preview:
@@ -22,7 +19,7 @@ jobs:
       - name: Deploy PR Preview
         uses: rossjrw/pr-preview-action@v1.4.8
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
           preview-branch: main
           source-dir: .
           umbrella-dir: pr-prveview
