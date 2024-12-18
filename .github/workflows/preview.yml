@@ -1,0 +1,29 @@
+name: Deploy PR previews
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Deploy PR Preview
+        uses: rossjrw/pr-preview-action@v1.4.8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          preview-branch: main
+          source-dir: .
+          umbrella-dir: pr-prveview
+          action: auto
